@@ -9,14 +9,14 @@ def builddict(id = None):
         if (id):
             payload = {
                 "user": id,
-                "tag":"pttdev",
+                "tag":"ptt",
                 "limit": 200,
                 "offset": offset,
                 "sort": "created"
             }
         else:
             payload = {
-                "tag":"pttdev",
+                "tag":"ptt",
                 "limit": 200,
                 "offset": offset,
                 "sort": "created"

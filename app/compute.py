@@ -28,22 +28,25 @@ def builddict(id = None):
 
         for anno in result["rows"]:
             # text = anno["target"][0]["selector"][2]["exact"]
-            text = json.loads(anno["text"])
-            id = text["id"]
-            tmp = {
-                "content": text["content"],
-                "ip": text["ip"],
-                "time": text["time"],
-                "url": anno["uri"]
-            }
             try:
-                id2text_dict[id]["count"] += 1
-                try:    # if the annotation exist
-                    id2text_dict[id]["data"].index(tmp)
-                except: # if not
-                    id2text_dict[id]["data"].append(tmp)
+                text = json.loads(anno["text"])
+                id = text["id"]
+                tmp = {
+                    "content": text["content"],
+                    "ip": text["ip"],
+                    "time": text["time"],
+                    "url": anno["uri"]
+                }
+                try:
+                    id2text_dict[id]["count"] += 1
+                    try:    # if the annotation exist
+                        id2text_dict[id]["data"].index(tmp)
+                    except: # if not
+                        id2text_dict[id]["data"].append(tmp)
+                except:
+                    id2text_dict[id] = {"count": 1, "data": [tmp]}
             except:
-                id2text_dict[id] = {"count": 1, "data": [tmp]}
+                pass
         if result["total"] < 200:
             break
     return id2text_dict
